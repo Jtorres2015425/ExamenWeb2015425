@@ -1,0 +1,50 @@
+html{
+    background-image:url('restau.jpg'); 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+h1{
+    text-align: center;
+    color: white;
+    background-color: brown;
+}
+.ui-widget {
+    font-size: 12px !important;
+}
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow: visible !important;
+}
+.ui-widget-header {
+    text-align: center;
+    text-transform: uppercase;
+}
+.ui-button {
+    margin-top: 10px !important;
+}
+
+#button li{
+   display: inline;
+   
+}
+
+#button li a{
+    font-family: Arial;
+ font-size: 11px;
+ text-decoration: none;
+ float: left;
+ padding: 10px;
+ background-color: #009999;
+ color: #fff;
+}
+
+#button li a:hover{
+  background-color: #2586d7;
+ margin-top:  auto;
+ padding-bottom: 12px;
+ }

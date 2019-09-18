@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FacturacionEditDlg" widgetVar="FacturacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFacturacionTitle}">
+            <h:form id="FacturacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{facturacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFacturacionLabel_idfacturacion}" for="idfacturacion" />
+                        <p:inputText id="idfacturacion" value="#{facturacionController.selected.idfacturacion}" title="#{bundle.EditFacturacionTitle_idfacturacion}" required="true" requiredMessage="#{bundle.EditFacturacionRequiredMessage_idfacturacion}"/>
+                        <p:outputLabel value="#{bundle.EditFacturacionLabel_fechafactura}" for="fechafactura" />
+                        <p:calendar id="fechafactura" pattern="MM/dd/yyyy HH:mm:ss" value="#{facturacionController.selected.fechafactura}" title="#{bundle.EditFacturacionTitle_fechafactura}" required="true" requiredMessage="#{bundle.EditFacturacionRequiredMessage_fechafactura}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditFacturacionLabel_idcliente}" for="idcliente" />
+                        <p:selectOneMenu id="idcliente" value="#{facturacionController.selected.idcliente}" required="true" requiredMessage="#{bundle.EditFacturacionRequiredMessage_idcliente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
+                                           var="idclienteItem"
+                                           itemValue="#{idclienteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFacturacionLabel_idmesa}" for="idmesa" />
+                        <p:selectOneMenu id="idmesa" value="#{facturacionController.selected.idmesa}" required="true" requiredMessage="#{bundle.EditFacturacionRequiredMessage_idmesa}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mesasController.itemsAvailableSelectOne}"
+                                           var="idmesaItem"
+                                           itemValue="#{idmesaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFacturacionLabel_idmesero}" for="idmesero" />
+                        <p:selectOneMenu id="idmesero" value="#{facturacionController.selected.idmesero}" required="true" requiredMessage="#{bundle.EditFacturacionRequiredMessage_idmesero}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{meserosController.itemsAvailableSelectOne}"
+                                           var="idmeseroItem"
+                                           itemValue="#{idmeseroItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditFacturacionLabel_idplatillo}" for="idplatillo" />
+                        <p:selectOneMenu id="idplatillo" value="#{facturacionController.selected.idplatillo}" required="true" requiredMessage="#{bundle.EditFacturacionRequiredMessage_idplatillo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{platillosController.itemsAvailableSelectOne}"
+                                           var="idplatilloItem"
+                                           itemValue="#{idplatilloItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{facturacionController.update}" value="#{bundle.Save}" update="display,:FacturacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FacturacionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FacturacionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CocinerosCreateDlg" widgetVar="CocinerosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCocinerosTitle}">
+            <h:form id="CocinerosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cocinerosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCocinerosLabel_idcocinero}" for="idcocinero" />
+                        <p:inputText id="idcocinero" value="#{cocinerosController.selected.idcocinero}" title="#{bundle.CreateCocinerosTitle_idcocinero}" required="true" requiredMessage="#{bundle.CreateCocinerosRequiredMessage_idcocinero}"/>
+                        <p:outputLabel value="#{bundle.CreateCocinerosLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{cocinerosController.selected.nombres}" title="#{bundle.CreateCocinerosTitle_nombres}" required="true" requiredMessage="#{bundle.CreateCocinerosRequiredMessage_nombres}"/>
+                        <p:outputLabel value="#{bundle.CreateCocinerosLabel_idcargo}" for="idcargo" />
+                        <p:selectOneMenu id="idcargo" value="#{cocinerosController.selected.idcargo}" required="true" requiredMessage="#{bundle.EditCocinerosRequiredMessage_idcargo}">
+                            <f:selectItems value="#{idcargocController.itemsAvailableSelectOne}"
+                                           var="idcargoItem"
+                                           itemValue="#{idcargoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCocinerosLabel_idturno}" for="idturno" />
+                        <p:selectOneMenu id="idturno" value="#{cocinerosController.selected.idturno}" required="true" requiredMessage="#{bundle.EditCocinerosRequiredMessage_idturno}">
+                            <f:selectItems value="#{turnosController.itemsAvailableSelectOne}"
+                                           var="idturnoItem"
+                                           itemValue="#{idturnoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cocinerosController.create}" value="#{bundle.Save}" update="display,:CocinerosListForm:datalist,:growl" oncomplete="handleSubmit(args,'CocinerosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CocinerosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

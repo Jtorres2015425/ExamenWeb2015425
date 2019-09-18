@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TurnosEditDlg" widgetVar="TurnosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTurnosTitle}">
+            <h:form id="TurnosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{turnosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTurnosLabel_idturno}" for="idturno" />
+                        <p:inputText id="idturno" value="#{turnosController.selected.idturno}" title="#{bundle.EditTurnosTitle_idturno}" required="true" requiredMessage="#{bundle.EditTurnosRequiredMessage_idturno}"/>
+                        <p:outputLabel value="#{bundle.EditTurnosLabel_entrada}" for="entrada" />
+                        <p:calendar id="entrada" pattern="HH:mm:ss" value="#{turnosController.selected.entrada}" title="#{bundle.EditTurnosTitle_entrada}" required="true" requiredMessage="#{bundle.EditTurnosRequiredMessage_entrada}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTurnosLabel_salida}" for="salida" />
+                        <p:calendar id="salida" pattern="HH:mm:ss" value="#{turnosController.selected.salida}" title="#{bundle.EditTurnosTitle_salida}" required="true" requiredMessage="#{bundle.EditTurnosRequiredMessage_salida}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{turnosController.update}" value="#{bundle.Save}" update="display,:TurnosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TurnosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TurnosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

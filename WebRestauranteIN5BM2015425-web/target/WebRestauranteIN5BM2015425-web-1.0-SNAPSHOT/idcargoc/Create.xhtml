@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IdcargocCreateDlg" widgetVar="IdcargocCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateIdcargocTitle}">
+            <h:form id="IdcargocCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{idcargocController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateIdcargocLabel_idcargo}" for="idcargo" />
+                        <p:inputText id="idcargo" value="#{idcargocController.selected.idcargo}" title="#{bundle.CreateIdcargocTitle_idcargo}" required="true" requiredMessage="#{bundle.CreateIdcargocRequiredMessage_idcargo}"/>
+                        <p:outputLabel value="#{bundle.CreateIdcargocLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{idcargocController.selected.descripcion}" title="#{bundle.CreateIdcargocTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateIdcargocRequiredMessage_descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{idcargocController.create}" value="#{bundle.Save}" update="display,:IdcargocListForm:datalist,:growl" oncomplete="handleSubmit(args,'IdcargocCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IdcargocCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlatillosEditDlg" widgetVar="PlatillosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPlatillosTitle}">
+            <h:form id="PlatillosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{platillosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPlatillosLabel_idplatillo}" for="idplatillo" />
+                        <p:inputText id="idplatillo" value="#{platillosController.selected.idplatillo}" title="#{bundle.EditPlatillosTitle_idplatillo}" required="true" requiredMessage="#{bundle.EditPlatillosRequiredMessage_idplatillo}"/>
+                        <p:outputLabel value="#{bundle.EditPlatillosLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{platillosController.selected.descripcion}" title="#{bundle.EditPlatillosTitle_descripcion}" required="true" requiredMessage="#{bundle.EditPlatillosRequiredMessage_descripcion}"/>
+                        <p:outputLabel value="#{bundle.EditPlatillosLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{platillosController.selected.precio}" title="#{bundle.EditPlatillosTitle_precio}" required="true" requiredMessage="#{bundle.EditPlatillosRequiredMessage_precio}"/>
+                        <p:outputLabel value="#{bundle.EditPlatillosLabel_idcocinero}" for="idcocinero" />
+                        <p:selectOneMenu id="idcocinero" value="#{platillosController.selected.idcocinero}" required="true" requiredMessage="#{bundle.EditPlatillosRequiredMessage_idcocinero}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cocinerosController.itemsAvailableSelectOne}"
+                                           var="idcocineroItem"
+                                           itemValue="#{idcocineroItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPlatillosLabel_idmenu}" for="idmenu" />
+                        <p:selectOneMenu id="idmenu" value="#{platillosController.selected.idmenu}" required="true" requiredMessage="#{bundle.EditPlatillosRequiredMessage_idmenu}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{menuController.itemsAvailableSelectOne}"
+                                           var="idmenuItem"
+                                           itemValue="#{idmenuItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{platillosController.update}" value="#{bundle.Save}" update="display,:PlatillosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PlatillosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PlatillosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
